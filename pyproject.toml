@@ -1,0 +1,25 @@
+[project]
+name = "lume-vnc-mcp"
+version = "0.1.0"
+description = "Lightweight MCP server that screenshots/clicks/types into a lume macOS VM over VNC"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=2.0.0",
+    "vncdotool>=1.2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Blackphi6/lume-vnc-mcp"
+Issues = "https://github.com/Blackphi6/lume-vnc-mcp/issues"
+
+[project.scripts]
+lume-vnc-mcp = "lume_vnc_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lume_vnc_mcp"]
