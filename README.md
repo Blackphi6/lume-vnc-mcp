@@ -28,17 +28,17 @@ It exposes exactly 4 tools, nothing more:
 
 ## Install
 
-With [`uv`](https://docs.astral.sh/uv/) (recommended — no manual venv needed):
+Not on PyPI yet, so install straight from this repo with
+[`uv`](https://docs.astral.sh/uv/) (no manual venv needed):
+
+```bash
+claude mcp add --scope user lume-vnc -- uvx --from git+https://github.com/Blackphi6/lume-vnc-mcp lume-vnc-mcp
+```
+
+Once this is published to PyPI, the command will shorten to:
 
 ```bash
 claude mcp add --scope user lume-vnc -- uvx lume-vnc-mcp
-```
-
-Or with `pip`:
-
-```bash
-pip install lume-vnc-mcp
-claude mcp add --scope user lume-vnc -- lume-vnc-mcp
 ```
 
 If your `lume` binary isn't on `PATH`, set `LUME_BIN` to its full path via
