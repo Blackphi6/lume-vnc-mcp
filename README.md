@@ -28,22 +28,46 @@ It exposes exactly 4 tools, nothing more:
 
 ## Install
 
+This is a plain [MCP](https://modelcontextprotocol.io) server over stdio —
+nothing in it is Claude-specific. It works with **any** MCP-compatible
+client: Claude Code, Claude Desktop, Cursor, Windsurf, Cline, Continue, Zed,
+VS Code (with an MCP-capable extension), and so on.
+
 Not on PyPI yet, so install straight from this repo with
-[`uv`](https://docs.astral.sh/uv/) (no manual venv needed):
+[`uv`](https://docs.astral.sh/uv/) (no manual venv needed). Once published
+to PyPI, drop `--from git+https://github.com/Blackphi6/lume-vnc-mcp` and
+just use `uvx lume-vnc-mcp`.
+
+### Claude Code
 
 ```bash
 claude mcp add --scope user lume-vnc -- uvx --from git+https://github.com/Blackphi6/lume-vnc-mcp lume-vnc-mcp
 ```
 
-Once this is published to PyPI, the command will shorten to:
+### Any other MCP client (Claude Desktop, Cursor, Windsurf, Cline, Continue, ...)
 
-```bash
-claude mcp add --scope user lume-vnc -- uvx lume-vnc-mcp
+Add this to that client's MCP config file (for Claude Desktop,
+`claude_desktop_config.json`; for Cursor, `.cursor/mcp.json`; etc. — see your
+client's own docs for the exact file and location):
+
+```json
+{
+  "mcpServers": {
+    "lume-vnc": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/Blackphi6/lume-vnc-mcp",
+        "lume-vnc-mcp"
+      ]
+    }
+  }
+}
 ```
 
-If your `lume` binary isn't on `PATH`, set `LUME_BIN` to its full path via
-`-e LUME_BIN=/path/to/lume` on the `claude mcp add` command (or the
-equivalent `env` entry in your MCP client's config).
+If your `lume` binary isn't on `PATH`, set `LUME_BIN` to its full path: add
+`-e LUME_BIN=/path/to/lume` on the `claude mcp add` command, or an `"env":
+{"LUME_BIN": "/path/to/lume"}` entry next to `"command"` in the JSON above.
 
 ## Usage
 
